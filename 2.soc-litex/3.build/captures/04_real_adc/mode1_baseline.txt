@@ -1,0 +1,161 @@
+Script started on 2026-10-04 17:54:33+02:00 [TERM="xterm-kitty" TTY="/dev/pts/1" COLUMNS="104" LINES="25"]
+[0m[38;5;240m[49m[39m[27m[24m[K
+
+[2A7[0m[49m[39m[38;5;240m╭─[0m[38;5;240m[49m[38;5;236m░▒▓[0m[38;5;236m[48;5;236m[38;5;31m [1m[38;5;31m[48;5;236m[38;5;39m~[0m[38;5;39m[48;5;236m[48;5;236m[38;5;31m/fpga/[1m[38;5;31m[48;5;236m[38;5;39muberClock[0m[38;5;39m[48;5;236m[48;5;236m[38;5;31m/2.soc-litex/[1m[38;5;31m[48;5;236m[38;5;39m3.build[0m[38;5;39m[48;5;236m[48;5;236m[38;5;31m[0m[38;5;31m[48;5;236m[48;5;236m[38;5;31m [0m[38;5;31m[48;5;236m[49m[38;5;236m▓▒░[0m[38;5;236m[49m[39m[38;5;240m───────────────────────────────────[0m[38;5;240m[49m[38;5;236m░▒▓[0m[38;5;236m[48;5;236m[38;5;70m [0m[38;5;70m[48;5;236m[48;5;236m[38;5;70m✔[0m[38;5;70m[48;5;236m[48;5;236m[38;5;70m [0m[38;5;70m[48;5;236m[48;5;236m[38;5;70m[0m[38;5;70m[48;5;236m[48;5;236m[38;5;66m[38;5;244m[0m[38;5;244m[48;5;236m[48;5;236m[38;5;66m 17:54:33[0m[38;5;66m[48;5;236m[48;5;236m[38;5;66m[0m[38;5;66m[48;5;236m[48;5;236m[38;5;66m [49m[38;5;236m▓▒░[0m[38;5;236m[48;5;236m[38;5;66m[0m[38;5;66m[48;5;236m[49m[39m[38;5;240m─╮
+[0m[38;5;240m[49m[39m[38;5;240m╰─[0m[38;5;240m[49m[39m[0m[49m[39m [0m[49m[39m                                                                                                  [0m[38;5;240m[49m[39m[38;5;240m─╯[0m[38;5;240m[49m[39m[27m[24m[3C[?2004h[?25l8[0m[49m[39m[27m[24m[J]2;hamed@archlinux:~/fpga/uberClock/2.soc-litex/3.build]1;..litex/3.build]7;file://archlinux/home/hamed/fpga/uberClock/2.soc-litex/3.build\[0m[38;5;31m[49m[39m[27m[24m[1m[7m%[27m[1m[0m                                                                                                       [0m[49m[39m[27m[24m[K[0m[27m[24m[J[0m[38;5;240m[49m[39m
+[A[38;5;240m╭─[0m[38;5;240m[49m[38;5;236m░▒▓[0m[38;5;236m[48;5;236m[38;5;31m [1m[38;5;31m[48;5;236m[38;5;39m~[0m[38;5;39m[48;5;236m[48;5;236m[38;5;31m/fpga/[1m[38;5;31m[48;5;236m[38;5;39muberClock[0m[38;5;39m[48;5;236m[48;5;236m[38;5;31m/2.soc-litex/[1m[38;5;31m[48;5;236m[38;5;39m3.build[0m[38;5;39m[48;5;236m[48;5;236m[38;5;31m[0m[38;5;31m[48;5;236m[48;5;236m[38;5;31m [0m[38;5;31m[48;5;236m[48;5;236m[38;5;244m[0m[38;5;244m[48;5;236m[48;5;236m[38;5;178m [38;5;76mdev-gui [38;5;76m*1 [38;5;178m!1 [38;5;39m?9[0m[38;5;39m[48;5;236m[48;5;236m[38;5;178m [0m[38;5;178m[48;5;236m[49m[38;5;236m▓▒░[0m[38;5;236m[49m[39m[38;5;240m─────[0m[38;5;240m[49m[38;5;236m░▒▓[0m[38;5;236m[48;5;236m[38;5;70m [0m[38;5;70m[48;5;236m[48;5;236m[38;5;70m✔[0m[38;5;70m[48;5;236m[48;5;236m[38;5;70m [0m[38;5;70m[48;5;236m[48;5;236m[38;5;70m[0m[38;5;70m[48;5;236m[48;5;236m[38;5;37m[38;5;244m[0m[38;5;244m[48;5;236m[48;5;236m[38;5;37m litex[0m[38;5;37m[48;5;236m[48;5;236m[38;5;37m 🐍[0m[38;5;37m[48;5;236m[48;5;236m[38;5;37m [0m[38;5;37m[48;5;236m[48;5;236m[38;5;37m[0m[38;5;37m[48;5;236m[48;5;236m[38;5;66m[38;5;244m[0m[38;5;244m[48;5;236m[48;5;236m[38;5;66m 17:54:33[0m[38;5;66m[48;5;236m[48;5;236m[38;5;66m[0m[38;5;66m[48;5;236m[48;5;236m[38;5;66m [49m[38;5;236m▓▒░[0m[38;5;236m[48;5;236m[38;5;66m[0m[38;5;66m[48;5;236m[49m[39m[38;5;240m─╮
+[0m[38;5;240m[49m[39m[38;5;240m╰─[0m[38;5;240m[49m[39m[0m[49m[39m [0m[49m[39m[K[98C[0m[49m[39m[38;5;240m─╯[39m[100D[?1h[?25h[?2004hscript -q captures/04_real_adc/mode1_baseline.txt[49Dmake load                                        [40Dterm PORT=/dev/ttyUSB1[?1l[?2004l
+]2;make term PORT=/dev/ttyUSB1]1;make[term] port=/dev/ttyUSB1
+source /home/hamed/.venv/litex/bin/activate && \
+KERNEL_PATH=$(find /home/hamed/fpga/uberClock/2.soc-litex/2.sw -maxdepth 1 -type f -name '*.bin' | head -n1); \
+if [ -z "${KERNEL_PATH}" ]; then \
+  echo "Error: no .bin found in /home/hamed/fpga/uberClock/2.soc-litex/2.sw" >&2; \
+  exit 1; \
+fi; \
+litex_term /dev/ttyUSB1 --kernel="${KERNEL_PATH}"
+
+[1m        __   _ __      _  __[0m
+[1m       / /  (_) /____ | |/_/[0m
+[1m      / /__/ / __/ -_)>  <[0m
+[1m     /____/_/\__/\__/_/|_|[0m
+[1m   Build your hardware, easily![0m
+
+ (c) Copyright 2012-2026 Enjoy-Digital
+ (c) Copyright 2007-2015 M-Labs
+
+ BIOS built on Sep 20 2026 17:07:46
+ BIOS CRC passed (26a3a422)
+
+ LiteX git sha1: 3f01ef965
+
+--================ [1mSoC[0m =================--
+[1mCPU[0m:		VexRiscv @ 100MHz
+[1mBUS[0m:		wishbone 32-bit data/32-bit addr
+[1mCSR[0m:		32-bit data big ordering
+[1mROM[0m:		128.0KiB
+[1mSRAM[0m:		8.0KiB
+[1mMAIN RAM[0m:	256.0KiB
+
+--=========== [1mInitialization[0m ===========--
+Ethernet init...
+Local IP: 192.168.1.50
+Memtest at 0x40000000 (256.0KiB)...
+  Write: 0x40000000-0x40000000 0B     Write: 0x40000000-0x40020000 128.0KiB     Write: 0x40000000-0x40040000 256.0KiB   
+   Read: 0x40000000-0x40000000 0B      Read: 0x40000000-0x40020000 128.0KiB      Read: 0x40000000-0x40040000 256.0KiB   
+Memtest OK
+Memspeed at 0x40000000 (Sequential, 256.0KiB)...
+  Write speed: 164.8MiB/s
+   Read speed: 85.9MiB/s
+--================ [1mBoot[0m ================--
+Booting from serial...
+Press Q or ESC to abort boot completely.
+sL5DdSMmkekro
+[LITEX-TERM] Received firmware download request from the device.
+[LITEX-TERM] Uploading /home/hamed/fpga/uberClock/2.soc-litex/2.sw/demo.bin to 0x40000000 (77800 bytes)...
+[LITEX-TERM] Upload calibration... (inter-frame:  0.00us, length: 251, window: 8)
+|>                    | 0%|>                    | 2%|>                    | 3%|=>                   | 5%|=>                   | 7%|=>                   | 9%|==>                  | 10%|==>                  | 12%|==>                  | 13%|===>                 | 15%|===>                 | 17%|===>                 | 18%|====>                | 20%|====>                | 21%|====>                | 23%|=====>               | 25%|=====>               | 26%|=====>               | 28%|======>              | 30%|======>              | 31%|======>              | 33%|======>              | 34%|=======>             | 36%|=======>             | 38%|=======>             | 39%|========>            | 41%|========>            | 42%|========>            | 44%|=========>           | 46%|=========>           | 47%|=========>           | 49%|==========>          | 50%|==========>          | 52%|==========>          | 54%|===========>         | 55%|===========>         | 57%|===========>         | 59%|============>        | 60%|============>        | 62%|============>        | 63%|=============>       | 65%|=============>       | 67%|=============>       | 68%|==============>      | 70%|==============>      | 71%|==============>      | 73%|===============>     | 75%|===============>     | 76%|===============>     | 78%|================>    | 80%|================>    | 81%|================>    | 83%|================>    | 84%|=================>   | 86%|=================>   | 88%|=================>   | 89%|==================>  | 91%|==================>  | 92%|==================>  | 94%|===================> | 96%|===================> | 97%|===================> | 99%[LITEX-TERM] Upload complete (10.9KB/s).
+[LITEX-TERM] Booting the device.
+[LITEX-TERM] Done.
+Executing booted program at 0x40000000
+
+--============== [1mLiftoff![0m ==============--
+dsp_run = 1
+sig3 enabled on ch1..ch3
+UberClock init done. build=loopback-fifo-v1 compiled=Sep 21 2026 00:41:15 window=rect
+Type 'help' for top-level, 'help_uc' for UberClock commands, 'help_ddr' for DDR commands.
+[92;1m[92;1muberClock[0m>[0m upsampler_input_mux 2
+Upsampler input mux register set to 2
+[92;1m[92;1muberClock[0m>[0m input)se   _select 0
+Main input select register set to 0
+[92;1m[92;1muberClock[0m>[0m fft_fs 10000
+fft_fs = 10000 Hz
+[92;1m[92;1muberClock[0m>[0m trackq_start 10003000 0 0 2048 1000 10 100 20
+trackq config: build=loopback-fifo-v1 compiled=Sep 21 2026 00:41:15 mode=validate-ch1-y window=rect estimator=power-parabola Fs=10000 N=2048 input=0 pnco=10324440 pdown=10327538
+trackq_start: ch1=10003000 Hz ch2=3386370 Hz ch3=3727990 Hz N=2048 center=1000 Hz delta={10,100,20} Hz sig3={{990,1000,1010},{900,1000,1100},{980,1000,1020}} Hz interval=1 s
+[92;1m[92;1muberClock[0m>[0m trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=0 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=16471 oldov=1 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14985 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+trackq validate: nco=9999999.404Hz bb=(na)0.000Hz dticks=12384 k=1 y={144,16,0} den=112 N=2048 window=rect input=0 pnco=10324440 pdown=10327538 drained=14988 oldov=0 ov=0 uf=0 expected=(na)3000.647Hz
+
+[1m[7m%[27m[1m[0m                                                                                                        ]2;hamed@archlinux:~/fpga/uberClock/2.soc-litex/3.build]1;..litex/3.build]7;file://archlinux/home/hamed/fpga/uberClock/2.soc-litex/3.build\[0m[49m[39m[K
+[0m[27m[24m[J[0m[38;5;240m[49m[39m
+[A[38;5;240m╭─[0m[38;5;240m[49m[38;5;236m░▒▓[0m[38;5;236m[48;5;236m[38;5;31m [1m[38;5;31m[48;5;236m[38;5;39m~[0m[38;5;39m[48;5;236m[48;5;236m[38;5;31m/[38;5;103mf[0m[38;5;103m[48;5;236m[48;5;236m[38;5;31m/[1m[38;5;31m[48;5;236m[38;5;39muberClock[0m[38;5;39m[48;5;236m[48;5;236m[38;5;31m/[38;5;103m2.soc-[0m[38;5;103m[48;5;236m[48;5;236m[38;5;31m/[1m[38;5;31m[48;5;236m[38;5;39m3.build[0m[38;5;39m[48;5;236m[48;5;236m[38;5;31m[0m[38;5;31m[48;5;236m[48;5;236m[38;5;31m [0m[38;5;31m[48;5;236m[48;5;236m[38;5;244m[0m[38;5;244m[48;5;236m[48;5;236m[38;5;178m [38;5;76mdev-gui [38;5;76m*1 [38;5;178m!1 [38;5;39m?9[0m[38;5;39m[48;5;236m[48;5;236m[38;5;178m [0m[38;5;178m[48;5;236m[49m[38;5;236m▓▒░[0m[38;5;236m[49m[39m[38;5;240m
+[0m[38;5;240m[49m[39m[38;5;240m╰─[0m[38;5;240m[49m[39m[0m[49m[39m [0m[49m[39m[K[98C[0m[49m[39m[38;5;240m─╯[39m[100D[?1h[?2004hmake term PORT=/dev/ttyUSB1[22Dload                  [18Dterm PORT=/dev/ttyUSB1[27D                           [27D[?2004l
+
+Script done on 2026-10-04 17:57:34+02:00 [COMMAND_EXIT_CODE="130"]

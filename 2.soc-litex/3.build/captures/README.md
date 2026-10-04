@@ -2,7 +2,7 @@
 
 All files here are `script`-captured serial console sessions from the closed
 loop (`input_select=1`) bench tests run during the trackq frequency-estimator
-investigation. They're organized into three eras, corresponding to the state
+investigation. They're organized into eras, corresponding to the state
 of the firmware at capture time. See the doc "UberClock Estimator
 Investigation Record" for the full narrative and analysis these captures
 feed into.
@@ -56,6 +56,32 @@ before/after comparison in the doc (Sections 8, 9, 12).
 A near-duplicate of `full_sweep_2048.txt` (`post_logpower_analyze.txt`,
 identical register sequence, one line shorter) was dropped rather than kept
 as clutter.
+
+## `05_post_rebuild_verification/` — confirming a fresh rebuild still matches the Hann+log-power era
+
+During a later session, the board was found to be booting a firmware image
+whose diagnostic strings (`TRACKQ_BUILD_ID`/`TRACKQ_WINDOW`, `uberclock.c:28-29`)
+still read `"loopback-fifo-v1"`/`"rect"` -- left over from before the
+Hann+log-power fix and never updated. Since those are hardcoded label strings,
+not something derived from the actual windowing/interpolation code, they
+cannot be used to tell which algorithm is really compiled in. This capture
+exists to answer that behaviorally instead of by label: same Part A register
+setting as the `02_`/`03_` eras, taken immediately after a fresh
+`make build-sw` + reflash, checked against the known bias signatures for each
+formula (rect+linear-power: `bb` near 1000.82 Hz; Hann+log-power: `bb` near
+999.49 Hz).
+
+| File | Corresponds to | Register setting |
+|---|---|---|
+| `baseline_2048_midbin.txt` | `03_loopback_post_logpower/baseline_2048_midbin.txt` | `phase_down_1=10323408` |
+
+Result: `bb` averaged 999.4886 Hz across 55 records (mean bias -0.0814 Hz vs.
+the `03_` era's -0.0808 Hz, jitter 6.60 mHz vs. 8.32 mHz) -- confirming the
+rebuilt firmware genuinely runs Hann+log-power and reproduces the documented
+era-3 numbers, independent of the stale boot-banner label. The
+`TRACKQ_BUILD_ID`/`TRACKQ_WINDOW` strings were corrected to
+`"hann-logpower-v1"`/`"hann"` immediately after this result, so future
+captures won't need this same behavioral workaround.
 
 ## How to reproduce a capture
 

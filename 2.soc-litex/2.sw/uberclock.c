@@ -25,8 +25,8 @@ static inline int parse_s(const char *s, int minv, int maxv, const char *what);
 static int ds_capture_begin(unsigned settle);
 static int ds_capture_end(void);
 static int track3_wait_ds_fifo(const char *phase, unsigned sample_idx, unsigned total);
-#define TRACKQ_BUILD_ID "loopback-fifo-v1"
-#define TRACKQ_WINDOW "rect"
+#define TRACKQ_BUILD_ID "hann-logpower-v1"
+#define TRACKQ_WINDOW "hann"
 #define DS_CAPTURE_SETTLE 256u
 
 typedef struct {

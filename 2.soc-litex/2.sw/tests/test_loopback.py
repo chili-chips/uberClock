@@ -34,6 +34,7 @@ PREAMBLE = r'''
 #define FFT_MAX_N 2048u
 #define FFT_CFG_MAX_BYTES 12288u
 #define TRACK3_FIFO_WAIT_POLLS 1000000u
+#define TRACKQ_PI 3.14159265358979323846
 typedef struct { int16_t x[6], y[6]; } iq6_frame_t;
 static kiss_fft_cpx fft_in[FFT_MAX_N], fft_out[FFT_MAX_N];
 static uint8_t fft_cfg_mem[FFT_CFG_MAX_BYTES] __attribute__((aligned(8)));
@@ -119,7 +120,12 @@ int main(void) {
     for (unsigned i = 0; i < 2048; ++i)
         track_samples[0][i] = (int16_t)lrint(12000*cos(2*3.141592653589793*beat*i/10000));
     assert(trackq_fft_peak_vertex_estimate_mhz(track_samples[0], 2048, 0, 0, &estimate));
-    assert(llabs(estimate - 1000822) < 15); /* rectangular power-fit bias is expected */
+    /* Hann+log-power bias is expected (~-76 mHz here), matching the
+     * investigation record's own Section 7 worked example (-0.078 Hz at
+     * N=2048 mid-bin). This was 1000822 (rect+linear-power's output) before
+     * the Hann+log-power fix landed; the assertion was not updated at the
+     * time, silently leaving this test asserting the pre-fix formula. */
+    assert(llabs(estimate - 999494) < 15);
     memset(track_samples, 0, sizeof(track_samples));
     assert(!trackq_fft_peak_vertex_estimate_mhz(track_samples[0], 2048, 0, 0, &estimate));
     assert(estimate == 0 && trackq_dbg_k_peak == 0 && trackq_dbg_den == 0);
