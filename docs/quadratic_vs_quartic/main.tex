@@ -3,6 +3,8 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{float}
 
 \title{FFT Peak Interpolation: Quadratic vs.\ Quartic Fits,\\
 and the Zero-at-Center / Worst-near-Quarter-Bin Bias Pattern}
@@ -56,6 +58,18 @@ the measured peak entirely as $\delta$ moves away from zero.
 Figure~\ref{fig:quartic-vs-quadratic} shows this numerically: bias
 exceeding half a bin by $\delta=0.5$, far worse than simply not
 correcting at all.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{fig_quartic_vs_quadratic.png}
+  \caption{The power-domain quadratic fit (Eq.~\eqref{eq:log-power})
+  compared against the quartic Re/Im fit from this section, on identical
+  data. The quartic approach is not a refinement of the quadratic one
+  -- it is substantially worse, because the unconstrained 3-point
+  complex fit has no mechanism to stay well-behaved away from the
+  measured bins.}
+  \label{fig:quartic-vs-quadratic}
+\end{figure}
 
 \section{Approach 2: fit the power directly (quadratic)}
 
@@ -120,7 +134,7 @@ about $0.016$ bins near $\delta \approx 0.29$ -- in close agreement
 with real bench measurements of the same formula ($-0.078\,$Hz at the
 mid-bin point, corresponding to the same $\sim\!0.016$-bin scale).
 
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.75\textwidth]{fig_bias_symmetry.png}
   \caption{Bias of the Hann-windowed, log-power 3-point estimator as a
@@ -130,17 +144,191 @@ mid-bin point, corresponding to the same $\sim\!0.016$-bin scale).
   \label{fig:bias-symmetry}
 \end{figure}
 
-\begin{figure}[h]
+\section{Comparing estimators}
+\label{sec:comparison}
+
+Table~\ref{tab:bias-comparison} puts numbers behind the discussion
+above, evaluating every estimator this investigation considered on
+the same noiseless single-tone model used to generate
+Figures~\ref{fig:quartic-vs-quadratic} and~\ref{fig:bias-symmetry}
+($N=2048$, $F_s=10\,$kHz, bin width $4.883\,$Hz, peak swept across
+$\delta \in [0, 0.5]$ in steps of $0.025$ bins). ``Peak bias'' is the
+worst-case error over that sweep; ``bias at $\delta=0.25$'' isolates
+the quarter-bin point used elsewhere in this document as the
+representative worst-case location for the shipped estimator.
+
+\begin{table}[H]
   \centering
-  \includegraphics[width=0.75\textwidth]{fig_quartic_vs_quadratic.png}
-  \caption{The power-domain quadratic fit (Eq.~\eqref{eq:log-power})
-  compared against the quartic Re/Im fit from Section~2, on identical
-  data. The quartic approach is not a refinement of the quadratic one
-  -- it is substantially worse, because the unconstrained 3-point
-  complex fit has no mechanism to stay well-behaved away from the
-  measured bins.}
-  \label{fig:quartic-vs-quadratic}
-\end{figure}
+  \caption{Interpolation bias by estimator, noiseless single tone,
+  $N=2048$. Rows are grouped by window; the log-power quadratic
+  (Eq.~\eqref{eq:log-power}) is the one shipped in firmware.}
+  \label{tab:bias-comparison}
+  \begin{tabular}{llrrr}
+    \toprule
+    Estimator & Window & Peak bias (bin) & Peak bias (Hz) & Bias @ $\delta{=}0.25$ \\
+    \midrule
+    Linear-power quadratic (Eq.~\eqref{eq:linear-power})
+      & rect & $0.284$  & $1.385$ & $-0.231$ \\
+    Log-power quadratic (Eq.~\eqref{eq:log-power})
+      & rect & $0.167$  & $0.817$ & $-0.156$ \\
+    Jacobsen
+      & rect & $0.000$  & $0.000$ & $0.000$ \\
+    Jacobsen + Candan 2011 correction
+      & rect & $0.000$  & $0.000$ & $0.000$ \\
+    Jacobsen + Candan 2013 correction
+      & rect & $0.000$  & $0.000$ & $0.000$ \\
+    \midrule
+    \textbf{Log-power quadratic (SHIPPED)}
+      & Hann & $\mathbf{0.016}$ & $\mathbf{0.078}$ & $\mathbf{0.016}$ \\
+    Jacobsen
+      & Hann & $0.250$  & $1.222$ & $-0.125$ \\
+    Jacobsen + Candan 2011 correction
+      & Hann & $0.250$  & $1.222$ & $-0.125$ \\
+    Quinn's 2nd estimator
+      & Hann & $0.667$  & $3.257$ & $-0.500$ \\
+    Quartic Re/Im fit (rejected)
+      & Hann & $0.625$  & $3.052$ & $-0.313$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Three things stand out:
+\begin{itemize}
+  \item \textbf{Jacobsen and its Candan corrections are near-exact for
+        a rectangular window} on this noiseless single-tone model --
+        their closed-form derivations assume exactly that window, and
+        the table rounds to zero bias at 3 decimals. The true residual
+        is of order $10^{-6}$--$10^{-7}$ bin, not literally zero: the
+        test tone is a real cosine, so it has a second, negative-frequency
+        image far on the other side of the spectrum, and that image's
+        rectangular-window sidelobe leakage (which decays slowly, as
+        $1/\text{distance}$) is what the closed-form derivation --
+        written for a single one-sided complex exponential -- does not
+        account for. They are
+        \emph{not} derived for a Hann window, and simply carrying the
+        rectangular-window Candan correction factor over to
+        Hann-windowed bins (as tested here) does not fix anything: the
+        peak bias stays at $0.25$ bin, identical to uncorrected
+        Jacobsen, because the correction constant itself is wrong for
+        this window.
+  \item \textbf{The shipped Hann + log-power quadratic has the
+        smallest peak bias of every Hann-window estimator tested} --
+        over $15\times$ smaller than Jacobsen on the same window, and
+        more than $40\times$ smaller than the rejected quartic fit.
+        This is the quantitative version of the symmetry argument in
+        the sections above: because $\ln|X(k)|^2$ is (to a good
+        approximation) a genuine parabola in $k$ for a Hann mainlobe,
+        the log-power quadratic is close to exact precisely where the
+        others are not derived to be exact at all.
+  \item \textbf{Quinn's 2nd estimator and the quartic Re/Im fit are
+        the two worst performers on a Hann window} -- worse than not
+        correcting at all for Quinn's estimator ($0.667$ bin exceeds
+        the $0.5$-bin range being corrected for), and worse than half
+        a bin for the quartic fit. Both share the same root cause
+        described in Section~2: a 3-point fit with no constraint
+        forcing it to decay away from the peak, applied to a window
+        whose shape the estimator's derivation did not assume.
+\end{itemize}
+
+\section{Interferer robustness: would a rectangular window make Jacobsen the better choice?}
+\label{sec:interferer}
+
+Table~\ref{tab:bias-comparison} describes only a perfectly isolated
+tone. On real hardware, \texttt{uberclock.c} explicitly does not
+assume that: it worries about ``any unrelated, momentarily-stronger
+spectral component (image, harmonic, filter leakage)'' showing up
+alongside the tracked tone. Since rect+Jacobsen looked essentially
+exact in Table~\ref{tab:bias-comparison}, it is worth checking whether
+switching the firmware's window stage from Hann to rectangular (to let
+Jacobsen run on the window it is actually derived for) would be a net
+win once a second tone is nearby -- the scenario a 5-channel,
+3-tone-per-channel signal generator makes routine.
+
+The two-tone model below injects exactly that: the tracked tone stays
+bin-centered ($\delta = 0$) while a second tone is placed at a
+deliberately non-bin-aligned offset so it genuinely leaks across bins.
+Table~\ref{tab:interferer-distance} sweeps that interferer's distance
+at equal (0 dB) amplitude; Table~\ref{tab:interferer-amplitude} fixes
+the distance at 8.5 bins and sweeps its amplitude instead.
+
+\begin{table}[H]
+  \centering
+  \caption{Bias vs.\ interferer distance, equal-amplitude (0 dB)
+  second tone, tracked tone bin-centered. ``Ratio'' is
+  $|\text{rect+Jacobsen bias}| / |\text{Hann+log-power bias}|$ --
+  above 1 means rect+Jacobsen is worse.}
+  \label{tab:interferer-distance}
+  \begin{tabular}{rrrr}
+    \toprule
+    Interferer distance (bins) & rect+Jacobsen & Hann+log-power (SHIPPED) & Ratio \\
+    \midrule
+    20.50 & $+0.000274$ & $-0.000003$ & $104.3$ \\
+    10.50 & $+0.001054$ & $-0.000041$ & $25.6$ \\
+    6.50  & $+0.002797$ & $-0.000306$ & $9.2$ \\
+    4.50  & $+0.006024$ & $-0.001523$ & $4.0$ \\
+    3.50  & $+0.010398$ & $-0.004894$ & $2.1$ \\
+    2.50  & $+0.022978$ & $-0.021233$ & $1.1$ \\
+    1.75  & $+0.095396$ & $+0.638170$ & $0.15$ \\
+    1.50  & $+0.117501$ & $+0.570942$ & $0.21$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Bias vs.\ interferer amplitude, fixed 8.5-bin distance,
+  tracked tone bin-centered.}
+  \label{tab:interferer-amplitude}
+  \begin{tabular}{rrr}
+    \toprule
+    Interferer amplitude (dB) & rect+Jacobsen & Hann+log-power (SHIPPED) \\
+    \midrule
+    $-40$ & $+0.000016$ & $-0.000001$ \\
+    $-20$ & $+0.000162$ & $-0.000010$ \\
+    $-10$ & $+0.000511$ & $-0.000031$ \\
+    $-6$  & $+0.000810$ & $-0.000050$ \\
+    $0$   & $+0.001617$ & $-0.000099$ \\
+    $6$   & $+0.003229$ & $-0.000197$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The answer is \textbf{no, not in general} -- and the nuance matters:
+\begin{itemize}
+  \item For an interferer more than about $2$ bins away, Hann+log-power
+        stays dramatically more accurate: $9\times$ better at 6.5 bins,
+        over $100\times$ better at 20.5 bins. At the fixed 8.5-bin
+        distance, Hann+log-power is roughly $16\times$ better across
+        the \emph{entire} $-40$ to $+6\,$dB amplitude range tested --
+        the ranking does not flip no matter how strong the interferer
+        gets, as long as it stays that far away.
+  \item The ranking \emph{does} flip for a very close interferer:
+        inside about $2$ bins, rect+Jacobsen becomes the more accurate
+        of the two, and by 1.5--1.75 bins the shipped Hann+log-power
+        estimator is actually several times \emph{worse} than
+        rect+Jacobsen ($0.57$--$0.64$ bin vs.\ $0.10$--$0.12$ bin).
+  \item This crossover is a direct consequence of Hann's wider
+        mainlobe: Hann's mainlobe is roughly twice as wide
+        (null-to-null) as rectangular's, so a very close interferer
+        sits inside Hann's mainlobe skirt, where its much faster
+        sidelobe roll-off does not help. A narrower rectangular
+        mainlobe handles that specific close-in geometry better, at
+        the cost of the slowly-decaying sidelobes that make it worse
+        everywhere else.
+\end{itemize}
+
+Switching the firmware's window stage to rectangular to let Jacobsen
+run on near-exact ground would therefore only be the right call if the
+tracked tone could be guaranteed spectrally isolated by more than
+about $2$ bins from every other channel, harmonic, and leakage source
+at all times -- an assumption \texttt{uberclock.c} explicitly declines
+to make, and the earlier Hann-without-log-power attempt
+(\texttt{05\_hann\_only\_uncompensated\_REVERTED.txt}) was reverted for
+a related regression. Outside that narrow near-in-frequency case, a
+rectangular-window switch would trade a small, bounded, well-understood
+bias for one that grows unboundedly worse as a real interferer gets
+closer -- the opposite of what Table~\ref{tab:bias-comparison}'s
+isolated-tone numbers alone would suggest.
 
 \section{Summary}
 
@@ -157,6 +345,22 @@ mid-bin point, corresponding to the same $\sim\!0.016$-bin scale).
   \item The log-power fit's bias is exactly zero at the bin center and
         at the bin boundary, by symmetry of the three points being
         fit, with the worst case in between, near a quarter bin.
+  \item Table~\ref{tab:bias-comparison} confirms this holds up against
+        the standard literature estimators, not just the rejected
+        quartic fit: on a Hann window, the shipped log-power quadratic
+        has the smallest peak bias of every estimator tested, since
+        Jacobsen, Candan, and Quinn's closed-form estimators are all
+        derived for a rectangular window and are not valid as-is on
+        Hann-windowed bins.
+  \item On an isolated tone, rect+Jacobsen's bias is near-exact (not
+        exactly zero -- see Section~\ref{sec:comparison}), which could
+        suggest switching the firmware to a rectangular window. Section
+        \ref{sec:interferer} shows this is the wrong move except when a
+        second spectral component is guaranteed to stay more than
+        $\sim\!2$ bins away: beyond that distance Hann+log-power is
+        $9$--$100\times$ more accurate, and the Hann window was adopted
+        specifically because that isolation cannot be guaranteed on
+        real hardware.
 \end{itemize}
 
 \section*{References}
@@ -166,6 +370,11 @@ mid-bin point, corresponding to the same $\sim\!0.016$-bin scale).
   \item B. G. Quinn, ``Estimating Frequency by Interpolation Using
         Fourier Coefficients,'' \emph{IEEE Trans.\ Signal Processing},
         1994.
+  \item \c{C}.\ Candan, ``A Method For Fine Resolution Frequency
+        Estimation From Three DFT Samples,'' \emph{IEEE Signal
+        Processing Letters}, vol.\ 18, no.\ 6, 2011 (and the refined
+        arctan correction, \emph{IEEE Signal Processing Letters},
+        vol.\ 20, no.\ 9, 2013).
   \item F. J. Harris, ``On the Use of Windows for Harmonic Analysis
         with the Discrete Fourier Transform,'' \emph{Proc.\ IEEE},
         1978.

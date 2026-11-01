@@ -30,6 +30,15 @@ OPTIONS       ?= --with-uberddr3 --with-uberclock --with-ethernet
 SW_CODE_MEM   ?= main_ram
 SW_DATA_MEM   ?= main_ram
 
+# Toolchain: vivado (default) or openxc7
+TOOLCHAIN     ?= vivado
+
+# openXC7 install (actual layout on this machine: /opt/openxc7, not snap)
+OPENXC7_DIR               ?= /opt/openxc7
+CHIPDB                    ?= $(HOME)/openxc7-chipdb
+PRJXRAY_DB_DIR            ?= $(OPENXC7_DIR)/share/prjxray-db
+NEXTPNR_XILINX_PYTHON_DIR ?= $(OPENXC7_DIR)/share/nextpnr-xilinx/python
+
 SERVER_PID    := $(BUILD_DIR)/litex_server.pid
 CSR_CSV_FILE  ?= $(BUILD_DIR)/build/$(BOARD)/csr.csv
 
@@ -38,7 +47,7 @@ CSR_CSV_FILE  ?= $(BUILD_DIR)/build/$(BOARD)/csr.csv
 
 help:
 	@echo "Targets:"
-	@echo "  make build-board [FREQ=100e6] [OPTIONS='...']"
+	@echo "  make build-board [TOOLCHAIN=vivado|openxc7] [FREQ=100e6] [OPTIONS='...']"
 	@echo "  make load        [FREQ=100e6] [OPTIONS='...']"
 	@echo "  make term        [PORT=/dev/ttyUSB0]"
 	@echo "  make build-sw    [SW_CODE_MEM=main_ram] [SW_DATA_MEM=main_ram] [WITH_CXX=1]"
@@ -50,11 +59,19 @@ help:
 # ----------------------------
 build-board:
 	@echo "[build] target=$(TARGET_PY)"
-	@echo "[build] sys_clk=$(FREQ) options=$(OPTIONS)"
+	@echo "[build] toolchain=$(TOOLCHAIN) sys_clk=$(FREQ) options=$(OPTIONS)"
 	source $(LITEX_VENV)/bin/activate && \
+	if [ "$(TOOLCHAIN)" = "openxc7" ]; then \
+	  mkdir -p "$(CHIPDB)"; \
+	  export PATH="$(OPENXC7_DIR)/bin:$$PATH"; \
+	  export CHIPDB="$(CHIPDB)"; \
+	  export PRJXRAY_DB_DIR="$(PRJXRAY_DB_DIR)"; \
+	  export NEXTPNR_XILINX_PYTHON_DIR="$(NEXTPNR_XILINX_PYTHON_DIR)"; \
+	fi; \
 	PYTHONPATH=$(PYTHONPATH_REPO) \
 	$(PYTHON) $(TARGET_PY) \
 	  --build \
+	  --toolchain=$(TOOLCHAIN) \
 	  --sys-clk-freq=$(FREQ) \
 	  $(OPTIONS)
 # ——————————————————————————————————————————————————————————————

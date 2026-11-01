@@ -12,11 +12,34 @@ import subprocess
 import tempfile
 
 SW = Path(__file__).resolve().parents[1]
-SOURCE = (SW / "uberclock.c").read_text()
+
+# Post-refactor, the functions under test live under src/uberclock/ (split by
+# subsystem) rather than in one uberclock.c. Concatenate every production
+# source file so `function()` below can find each by name regardless of
+# which file it actually lives in.
+#
+# Order matters: function()'s regex (below) looks for the FIRST occurrence
+# of "<name>(...) {" in SOURCE. A handful of the extracted functions are no
+# longer `static` (they're called across module boundaries now) and a call
+# site like "if (!track3_wait_ds_fifo(...)) {" is textually indistinguishable
+# from a definition to that regex. Alphabetical order would put
+# uberclock_fft.c (which *calls* track3_wait_ds_fifo/ds_capture_begin/end)
+# ahead of uberclock_fifo.c (which *defines* them), so list each callee's
+# file before its callers' files explicitly; everything else is safe in any
+# order since nothing else in the extracted set calls into it.
+_SRC_DIR = SW / "src" / "uberclock"
+_CALLEE_BEFORE_CALLER = ["uberclock_hw.c", "uberclock_fifo.c", "uberclock_fft.c", "uberclock_track.c"]
+_ordered = [_SRC_DIR / name for name in _CALLEE_BEFORE_CALLER if (_SRC_DIR / name).exists()]
+_remaining = sorted(p for p in _SRC_DIR.glob("*.c") if p not in _ordered)
+SOURCE = "\n".join(path.read_text() for path in _ordered + _remaining)
 
 
 def function(name):
-    match = re.search(r"^static [^;{}]*\b" + name + r"\([^;{}]*\)\s*\{.*?^\}",
+    # "static" is optional: a few of these (ds_capture_begin/end,
+    # track3_wait_ds_fifo, capture_ds_fft_channel,
+    # trackq_fft_peak_vertex_estimate_mhz, uberclock_phase_inc_*) are called
+    # across module boundaries post-refactor and so are no longer `static`.
+    match = re.search(r"^(?:static\s+)?[^;{}]*\b" + name + r"\([^;{}]*\)\s*\{.*?^\}",
                       SOURCE, re.M | re.S)
     if not match:
         raise RuntimeError(f"Cannot find production function {name}")
@@ -31,15 +54,15 @@ PREAMBLE = r'''
 #include <stdlib.h>
 #include <string.h>
 #include "kiss_fft.h"
-#define FFT_MAX_N 2048u
-#define FFT_CFG_MAX_BYTES 12288u
+#define UBERCLOCK_FFT_MAX_N 2048u
+#define UBERCLOCK_FFT_CFG_MAX_BYTES 12288u
 #define TRACK3_FIFO_WAIT_POLLS 1000000u
 #define TRACKQ_PI 3.14159265358979323846
 typedef struct { int16_t x[6], y[6]; } iq6_frame_t;
-static kiss_fft_cpx fft_in[FFT_MAX_N], fft_out[FFT_MAX_N];
-static uint8_t fft_cfg_mem[FFT_CFG_MAX_BYTES] __attribute__((aligned(8)));
+static kiss_fft_cpx fft_in[UBERCLOCK_FFT_MAX_N], fft_out[UBERCLOCK_FFT_MAX_N];
+static uint8_t fft_cfg_mem[UBERCLOCK_FFT_CFG_MAX_BYTES] __attribute__((aligned(8)));
 static uint32_t fft_fs_hz = 10000;
-static int16_t track_samples[3][FFT_MAX_N], track_samples_ref[FFT_MAX_N];
+static int16_t track_samples[3][UBERCLOCK_FFT_MAX_N], track_samples_ref[UBERCLOCK_FFT_MAX_N];
 static unsigned ds_capture_drained, ds_capture_old_overflow;
 static unsigned ds_capture_overflow, ds_capture_underflow;
 static unsigned trackq_dbg_k_peak;
@@ -77,10 +100,10 @@ static void ds_fifo_read_frame(iq6_frame_t *frame) {
     main_ds_fifo_pop_write(1);
     for (unsigned i = 0; i < 6; ++i) frame->x[i] = frame->y[i] = latched;
 }
-static void track3_service_background(void) {
+static void ce_service_background(void) {
     if (!stalled && !old_count) ready = 1;
 }
-static void track3_service_background_budget(unsigned budget) { (void)budget; }
+static void ce_service_background_budget(unsigned budget) { (void)budget; }
 static void test_fft(kiss_fft_cfg cfg, const kiss_fft_cpx *in, kiss_fft_cpx *out) {
     if (!mock_fft) { kiss_fft(cfg, in, out); return; }
     memset(out, 0, sizeof(fft_out));
@@ -135,10 +158,10 @@ int main(void) {
     mock_fft = 2;
     assert(trackq_fft_peak_vertex_estimate_mhz(track_samples[0], 64, 1000000, 20, &estimate));
     assert(estimate == 1093750); /* coarse-bin upper search edge included */
-    assert(uc_phase_inc_from_hz(10000000, 65000000) == 10324441);
-    assert(uc_phase_inc_from_hz(0, 65000000) == 0);
-    assert(uc_phase_inc_from_hz(1, 0) == 0);
-    assert(uc_phase_inc_to_mhz(1032, 65000000) == 999570);
+    assert(uberclock_phase_inc_from_hz(10000000, 65000000) == 10324441);
+    assert(uberclock_phase_inc_from_hz(0, 65000000) == 0);
+    assert(uberclock_phase_inc_from_hz(1, 0) == 0);
+    assert(uberclock_phase_inc_to_mhz(1032, 65000000) == 999570);
     puts("PASS: fresh FIFO, drain limit, delayed clear, clear failure, timeout,");
     puts("      overflow/underflow rejection, channel capture, fixed-point FFT,");
     puts("      stale diagnostics, half-bin tie, coarse search, DDS rounding");
@@ -148,10 +171,10 @@ int main(void) {
 
 
 def main():
-    names = ["is_pow2_u", "uc_phase_inc_from_hz", "uc_phase_inc_to_mhz",
-             "ds_fifo_flush_all", "track3_wait_ds_fifo", "ds_capture_end",
+    names = ["is_pow2_u", "uberclock_phase_inc_from_hz", "uberclock_phase_inc_to_mhz",
+             "uberclock_ds_fifo_flush", "track3_wait_ds_fifo", "ds_capture_end",
              "ds_capture_begin", "capture_ds_fft_channel", "capture_ds_track_multi",
-             "fft_bin_power_at"]
+             "uberclock_fft_bin_power"]
     code = PREAMBLE + "\n".join(function(name) for name in names)
     code += "\n#define kiss_fft test_fft\n" + function("trackq_fft_peak_vertex_estimate_mhz")
     code += "\n#undef kiss_fft\n" + TESTS

@@ -2,7 +2,7 @@
 #include <irq.h>
 #include <libbase/uart.h>
 #include "console.h"
-#include "uberclock.h"
+#include "uberclock/uberclock.h"
 #include "cmd_list.h"
 
 
