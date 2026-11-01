@@ -180,6 +180,10 @@ vertex estimate is:
 The denominator should be negative for a real peak. If it is not, the firmware
 does not trust the parabola.
 
+See :doc:`/dsp/fft_peak_interpolation` for an analysis of this interpolator's
+bias behavior and how it compares against other three-point estimators from
+the literature.
+
 .. image:: ../_static/tracking_parabola.svg
    :alt: Quadratic interpolation from three power samples
    :width: 100%

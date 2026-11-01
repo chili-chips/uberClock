@@ -19,3 +19,4 @@ implementation of the specific modules.
    Simulation <simulation>
    ad_da_conversion
    cordic_downconversion
+   fft_peak_interpolation
