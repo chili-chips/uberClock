@@ -33,11 +33,27 @@ class UberClockCRG(LiteXModule):
 
     MMCM_MARGIN  = 1e-6
 
-    def __init__(self, platform, need_ddr_clks: bool = True):
+    def __init__(self, platform, need_ddr_clks: bool = True, need_idelayctrl: bool = True):
+        """
+        need_ddr_clks: creates cd_ub_4x/cd_ub_4x_dqs and the cd_idelay clock
+            domain -- UberDDR3 references ClockSignal("idelay") for its
+            IDELAYE2/ODELAYE2 ref_clk port regardless of whether ODELAY is
+            actually enabled (ODELAY_SUPPORTED), so the domain must exist
+            and be driven whenever DDR-adjacent blocks are present.
+        need_idelayctrl: instantiates the S7IDELAYCTRL BEL itself. Only the
+            standard LiteX s7ddrphy path has real IDELAYE2/ODELAYE2
+            instances needing calibration; an IDELAYCTRL with none in the
+            design is accepted by Vivado but is an illegal placement under
+            nextpnr-himbaechel/openXC7 ("Found IDELAYCTRL but no
+            I/ODELAYs"). Ignored (treated as False) when need_ddr_clks is
+            False, since there is then no cd_idelay domain to drive it.
+        """
         self.rst = Signal()
 
         self.locked0 = Signal()
         self.locked1 = Signal()
+
+        need_idelayctrl = need_idelayctrl and need_ddr_clks
 
         # ----------------------------
         # Clock domains
@@ -46,7 +62,8 @@ class UberClockCRG(LiteXModule):
         self.cd_uc        = ClockDomain("uc")
         self.cd_ub_4x     = ClockDomain("ub_4x")
         self.cd_ub_4x_dqs = ClockDomain("ub_4x_dqs")
-        self.cd_idelay    = ClockDomain("idelay")
+        if need_ddr_clks:
+            self.cd_idelay = ClockDomain("idelay")
 
         # ---------------------------------------------------------------------
         # Differential 200 MHz input buffer
@@ -88,11 +105,13 @@ class UberClockCRG(LiteXModule):
         # ---------------------------------------------------------------------
         # IDELAYCTRL reference clock (BUFG @ 200 MHz)
         # ---------------------------------------------------------------------
-        clk200_bufg = Signal()
-        self.specials += Instance("BUFG", i_I=clk200_se, o_O=clk200_bufg)
-        self.comb += self.cd_idelay.clk.eq(clk200_bufg)
+        if need_ddr_clks:
+            clk200_bufg = Signal()
+            self.specials += Instance("BUFG", i_I=clk200_se, o_O=clk200_bufg)
+            self.comb += self.cd_idelay.clk.eq(clk200_bufg)
 
-        self.idelayctrl = S7IDELAYCTRL(self.cd_idelay)
+            if need_idelayctrl:
+                self.idelayctrl = S7IDELAYCTRL(self.cd_idelay)
 
         # Constraints
         platform.add_false_path_constraints(self.cd_sys.clk, self.pll0.clkin)

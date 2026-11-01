@@ -175,8 +175,14 @@ class BaseSoC(SoCCore):
         # DDR clock outputs are needed if:
         #   - UberDDR3 is enabled, OR
         #   - LiteX is using external SDRAM (integrated RAM is disabled).
-        need_ddr_clks = bool(with_uberddr3) or (int(kwargs.get("integrated_main_ram_size", 0)) == 0)
-        self.submodules.crg = UberClockCRG(platform, need_ddr_clks=need_ddr_clks)
+        use_litedram_main_ram = (not with_uberddr3) and (int(kwargs.get("integrated_main_ram_size", 0)) == 0)
+        need_ddr_clks = bool(with_uberddr3) or use_litedram_main_ram
+        # The S7IDELAYCTRL BEL is only needed by the standard LiteX
+        # s7ddrphy path (litedram's A7DDRPHY uses IDELAYE2 for DQ deskew).
+        # UberDDR3 is instantiated below with ODELAY_SUPPORTED=0, so it has
+        # no real I/ODELAY primitive to calibrate -- see UberClockCRG's
+        # need_idelayctrl docstring.
+        self.submodules.crg = UberClockCRG(platform, need_ddr_clks=need_ddr_clks, need_idelayctrl=use_litedram_main_ram)
 
         # ---------------------------------------------------------------------
         # SoCCore init (CPU/CSR @ sys clock)
