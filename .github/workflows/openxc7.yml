@@ -115,6 +115,9 @@ jobs:
           python -m venv "$LITEX_VENV"
           source "$LITEX_VENV/bin/activate"
           python -m pip install -U pip setuptools wheel
+          # LiteX's Builder._check_meson() shells out to meson/ninja to build
+          # the BIOS; neither is pulled in by litex_setup.py --config=full.
+          python -m pip install meson ninja
           mkdir -p "$LITEX_DIR" && cd "$LITEX_DIR"
           wget -q https://raw.githubusercontent.com/enjoy-digital/litex/master/litex_setup.py
           python litex_setup.py --init --install --config=full
