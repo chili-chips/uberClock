@@ -148,6 +148,7 @@ jobs:
           set -o pipefail
           make build-board TOOLCHAIN=openxc7 \
             OPENXC7_DIR="$OPENXC7_DIR" CHIPDB="$CHIPDB" \
+            PRJXRAY_DB_DIR="$OPENXC7_DIR/share/nextpnr/prjxray-db" \
             PYTHON="$LITEX_VENV/bin/python3" \
             OPTIONS="--integrated-main-ram-size=0x10000 --nextpnr-seed=$NEXTPNR_SEED" \
             2>&1 | tee "$RUNNER_TEMP/build.log"
