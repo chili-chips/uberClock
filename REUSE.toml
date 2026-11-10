@@ -1,0 +1,24 @@
+# REUSE metadata for files without their own SPDX headers.
+# https://reuse.software/spec-3.3/
+# A file's own SPDX header takes priority ("closest"). Later entries win.
+version = 1
+
+[[annotations]]
+path = "**"
+precedence = "closest"
+SPDX-FileCopyrightText = "Chili.CHIPS"
+SPDX-License-Identifier = "BSD-3-Clause"
+
+# Third-party documents: vendor manuals, datasheets, journal papers.
+[[annotations]]
+path = [
+  "0.doc/Alinx/**",
+  "0.doc/Xilinx/**",
+  "0.doc/DSP/**.pdf",
+  "0.doc/Quartz/papers/**",
+  "0.doc/Quartz/nist-handbook_of_frequency_stability_analysis.pdf",
+  "0.doc/RISC-V/RISCV_CARD.pdf",
+]
+precedence = "override"
+SPDX-FileCopyrightText = "Respective copyright holders, as named in each document"
+SPDX-License-Identifier = "LicenseRef-Proprietary"
