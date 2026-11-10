@@ -1,0 +1,20 @@
+# GitLab CI: build Sphinx docs and publish to GitLab Pages
+# (port of .github/workflows/docs.yml)
+
+variables:
+  GIT_DEPTH: "1"
+
+pages:
+  image: python:3.11
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  before_script:
+    - apt-get update && apt-get install -y --no-install-recommends doxygen
+    - pip install -r 0.doc/docs/requirements.txt
+  script:
+    - cd 0.doc && mkdir -p build/doxygen/xml && doxygen Doxyfile && cd ..
+    - make -C 0.doc/docs html
+    - mv 0.doc/docs/build/html public
+  artifacts:
+    paths:
+      - public
