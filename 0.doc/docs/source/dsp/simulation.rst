@@ -1,7 +1,7 @@
 TB Uberclock Simulation Results
 ===============================
 
-This testbench simulates our DSP datapath without CPU (`method 1 <https://github.com/chili-chips-ba/uberClock/blob/dev-5channel-fifo/0.doc/HW_architecture.png>`_). Test case feeds
+This testbench simulates our DSP datapath without CPU (`method 1 <https://gitlab.com/chili-chips/uberclock/-/blob/dev-5channel-fifo/0.doc/HW_architecture.png>`_). Test case feeds
 one 10MHz sinewave into 5 channels. Each channel downconverts and downsamples the signal, adds gains, and then upsamples and upconverts. The output of the system is the sum of
 all 5 channels that in real case represents the driving signal of he oscillator.
 

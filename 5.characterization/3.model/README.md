@@ -6,7 +6,7 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 
 # Quartz Crystal Multi-Mode Equivalent Model
 
-This directory contains the mathematical modeling and parameter extraction tools for the [**uberClock**](https://github.com/chili-chips-ba/uberClock) project. The objective was to characterize the physical quartz crystal across varying temperatures and orientations, and to construct an accurate, data-driven Python model that will interface with our DSP datapath simulations.
+This directory contains the mathematical modeling and parameter extraction tools for the [**uberClock**](https://gitlab.com/chili-chips/uberclock) project. The objective was to characterize the physical quartz crystal across varying temperatures and orientations, and to construct an accurate, data-driven Python model that will interface with our DSP datapath simulations.
 
 ## 1. Objective
 
