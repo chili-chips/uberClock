@@ -55,23 +55,26 @@ pages:
           bbasm -l "$CI_CACHE/xc7a200t.bba" "$CHIPDB/xc7a200tfbg484.bin"
           rm "$CI_CACHE/xc7a200t.bba" )
       fi
-    # LiteX + fasm2frames (once)
+    # LiteX (once)
     - |
-      if [ ! -x "$LITEX_VENV/bin/fasm2frames" ]; then
+      if [ ! -x "$LITEX_VENV/bin/litex_term" ]; then
         rm -rf "$LITEX_VENV" "$LITEX_DIR"
         python3 -m venv "$LITEX_VENV"
-        source "$LITEX_VENV/bin/activate"
-        python -m pip install -U pip setuptools wheel meson ninja
-        mkdir -p "$LITEX_DIR" && cd "$LITEX_DIR"
-        wget -q https://raw.githubusercontent.com/enjoy-digital/litex/master/litex_setup.py
-        python litex_setup.py --init --install --config=full
-        git clone --depth 1 --filter=blob:none --sparse \
-          https://github.com/f4pga/prjxray.git prjxray_fasm2frames
-        (cd prjxray_fasm2frames && git sparse-checkout set utils prjxray)
-        sed -i "s/packages=\[prjxray\]/packages=[prjxray, utils]/" prjxray_fasm2frames/setup.py
-        pip install -e prjxray_fasm2frames
-        deactivate
-        cd "$CI_PROJECT_DIR"
+        "$LITEX_VENV/bin/python" -m pip install -U pip setuptools wheel meson ninja
+        mkdir -p "$LITEX_DIR"
+        wget -q -O "$LITEX_DIR/litex_setup.py" https://raw.githubusercontent.com/enjoy-digital/litex/master/litex_setup.py
+        (cd "$LITEX_DIR" && "$LITEX_VENV/bin/python" litex_setup.py --init --install --config=full)
+      fi
+    # fasm2frames from prjxray utils/ (once; checked by import, not by file)
+    - |
+      if ! "$LITEX_VENV/bin/python" -c "import utils.fasm2frames" 2>/dev/null; then
+        P="$LITEX_DIR/prjxray_fasm2frames"
+        rm -rf "$P"
+        git clone --depth 1 --filter=blob:none --sparse https://github.com/f4pga/prjxray.git "$P"
+        (cd "$P" && git sparse-checkout set utils prjxray)
+        sed -i "s/packages=\['prjxray'\]/packages=['prjxray', 'utils']/" "$P/setup.py"
+        "$LITEX_VENV/bin/python" -m pip install -e "$P"
+        "$LITEX_VENV/bin/python" -c "import utils.fasm2frames"
       fi
     - cp 2.soc/6.migen/platforms/alinx_ax7203.py "$LITEX_DIR/litex-boards/litex_boards/platforms/alinx_ax7203.py"
   script:
