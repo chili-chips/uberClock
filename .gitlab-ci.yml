@@ -18,3 +18,93 @@ pages:
   artifacts:
     paths:
       - public
+
+# ---------------------------------------------------------------------------
+# openXC7 build (port of .github/workflows/openxc7.yml)
+#
+# Runs only on the self-hosted runner tagged "openxc7" (WSL, shell executor),
+# which already has openXC7 1.0.0 in ~/opt/openxc7. Chip database, LiteX and
+# fasm2frames are set up once under $CI_CACHE and reused.
+#
+# cpu-only is a real gate. with-uberclock is allow_failure: it hits a known
+# nextpnr placement-legalization bug (docs/openxc7_port/main.tex, Issue 9).
+# ---------------------------------------------------------------------------
+.openxc7:
+  tags: [openxc7]
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_PIPELINE_SOURCE == "web"
+  timeout: 6h
+  variables:
+    NEXTPNR_SEED: "1"
+  before_script:
+    - set -eo pipefail
+    # Host paths on the runner (HOST_HOME is set in the runner config.toml).
+    - export OPENXC7_DIR="$HOST_HOME/opt/openxc7" CI_CACHE="$HOST_HOME/ci-cache/uberclock"
+    - export CHIPDB="$CI_CACHE/chipdb" LITEX_DIR="$CI_CACHE/litex" LITEX_VENV="$CI_CACHE/litex-venv"
+    - export PATH="$HOST_HOME/opt/xpack-riscv-none-elf-gcc-15.2.0-1/bin:$PATH"
+    - mkdir -p "$CI_CACHE"
+    # Chip database (once)
+    - |
+      if [ ! -s "$CHIPDB/xc7a200tfbg484.bin" ]; then
+        ( source "$OPENXC7_DIR/export.sh"
+          mkdir -p "$CHIPDB"
+          python3 "$OPENXC7_DIR/share/nextpnr/himbaechel/uarch/xilinx/gen/xilinx_gen.py" \
+            --xray "$OPENXC7_DIR/share/nextpnr/prjxray-db/artix7" \
+            --device xc7a200t --bba "$CI_CACHE/xc7a200t.bba"
+          bbasm -l "$CI_CACHE/xc7a200t.bba" "$CHIPDB/xc7a200tfbg484.bin"
+          rm "$CI_CACHE/xc7a200t.bba" )
+      fi
+    # LiteX + fasm2frames (once)
+    - |
+      if [ ! -x "$LITEX_VENV/bin/fasm2frames" ]; then
+        rm -rf "$LITEX_VENV" "$LITEX_DIR"
+        python3 -m venv "$LITEX_VENV"
+        source "$LITEX_VENV/bin/activate"
+        python -m pip install -U pip setuptools wheel meson ninja
+        mkdir -p "$LITEX_DIR" && cd "$LITEX_DIR"
+        wget -q https://raw.githubusercontent.com/enjoy-digital/litex/master/litex_setup.py
+        python litex_setup.py --init --install --config=full
+        git clone --depth 1 --filter=blob:none --sparse \
+          https://github.com/f4pga/prjxray.git prjxray_fasm2frames
+        (cd prjxray_fasm2frames && git sparse-checkout set utils prjxray)
+        sed -i "s/packages=\[prjxray\]/packages=[prjxray, utils]/" prjxray_fasm2frames/setup.py
+        pip install -e prjxray_fasm2frames
+        deactivate
+        cd "$CI_PROJECT_DIR"
+      fi
+    - cp 2.soc/6.migen/platforms/alinx_ax7203.py "$LITEX_DIR/litex-boards/litex_boards/platforms/alinx_ax7203.py"
+  script:
+    - |
+      make -C 3.build build-board TOOLCHAIN=openxc7 \
+        OPENXC7_DIR="$OPENXC7_DIR" CHIPDB="$CHIPDB" \
+        PRJXRAY_DB_DIR="$OPENXC7_DIR/share/nextpnr/prjxray-db" \
+        PYTHON="$LITEX_VENV/bin/python3" \
+        OPTIONS="--integrated-main-ram-size=0x10000 --nextpnr-seed=$NEXTPNR_SEED $EXTRA_ARGS" \
+        2>&1 | tee build.log
+    - test -s 3.build/build/alinx_ax7203/gateware/alinx_ax7203.bit
+    # Timing: last "Max frequency" line is post-route. LiteX allows timing
+    # failure, so a failing design still gives a bitstream: warn only.
+    - |
+      result=$(grep "Max frequency for clock s7mmcm0_clkout_buf" build.log | tail -1 || true)
+      echo "openXC7 sys clock ($CI_JOB_NAME): ${result##*: }"
+      if [[ "$result" == *FAIL* ]]; then echo "WARNING: sys clock misses 100 MHz with seed $NEXTPNR_SEED"; fi
+  artifacts:
+    when: always
+    expire_in: 30 days
+    paths:
+      - 3.build/build/alinx_ax7203/gateware/alinx_ax7203.bit
+      - 3.build/build/alinx_ax7203/gateware/build_alinx_ax7203.sh
+      - 3.build/build/alinx_ax7203/csr.csv
+      - build.log
+
+openxc7:cpu-only:
+  extends: .openxc7
+  variables:
+    EXTRA_ARGS: ""
+
+openxc7:with-uberclock:
+  extends: .openxc7
+  allow_failure: true
+  variables:
+    EXTRA_ARGS: "--with-uberclock"
