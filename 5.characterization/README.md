@@ -6,7 +6,7 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 
 # Resonant Frequency Analysis: Temperature and Orientation Effects
 
-This repository contains the dataset for the [**uberClock**](https://github.com/chili-chips-ba/uberClock) project, focusing on characterizing the resonant frequency of a crystal oscillator. The analysis investigates the impact of varying temperatures and different physical orientations of the board on the oscillator's stability across several vibration modes.
+This repository contains the dataset for the [**uberClock**](https://github.com/chili-chips/uberClock) project, focusing on characterizing the resonant frequency of a crystal oscillator. The analysis investigates the impact of varying temperatures and different physical orientations of the board on the oscillator's stability across several vibration modes.
 
 All measurements were performed using a Vector Network Analyzer (VNA), with raw data saved in `.s2p` format.
 
