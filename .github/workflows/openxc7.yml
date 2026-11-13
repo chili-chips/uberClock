@@ -54,7 +54,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       # -----------------------------------------------------------------
       # openXC7 toolchain (built from source once, then cached).
@@ -79,7 +79,7 @@ jobs:
       # correctness.
       - name: Restore openXC7 toolchain
         id: toolchain-cache
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v6
         with:
           path: ${{ env.OPENXC7_DIR }}
           key: openxc7-${{ env.OPENXC7_TAG }}-ubuntu-24.04-v1
@@ -92,14 +92,14 @@ jobs:
       # Saved immediately, so a later failing step doesn't discard it.
       - name: Save openXC7 toolchain
         if: steps.toolchain-cache.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v6
         with:
           path: ${{ env.OPENXC7_DIR }}
           key: ${{ steps.toolchain-cache.outputs.cache-primary-key }}
 
       - name: Restore chip database
         id: chipdb-cache
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v6
         with:
           path: ${{ env.CHIPDB }}
           key: openxc7-chipdb-xc7a200t-${{ env.OPENXC7_TAG }}-v1
@@ -117,7 +117,7 @@ jobs:
 
       - name: Save chip database
         if: steps.chipdb-cache.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v6
         with:
           path: ${{ env.CHIPDB }}
           key: ${{ steps.chipdb-cache.outputs.cache-primary-key }}
@@ -127,7 +127,7 @@ jobs:
       # minus pyenv).
       # -----------------------------------------------------------------
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.11"
 
@@ -193,7 +193,7 @@ jobs:
 
       - name: Upload bitstream and logs
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: openxc7-alinx_ax7203-${{ matrix.name }}
           path: |
