@@ -9,9 +9,9 @@
 ---
 Clocks can be extracted from GPS satellite signals, or locally generated with MEMS oscillators, SAW resonators, quartz crystal (XTAL, XO) or piezo resonators, often set in “ovens” (TCXO, OCXO), derived from atomic properties (like Cesium Beam, Hydrogen Maser, Rubidium, Strontium or Ytterbium), or obtained in another way.
 
-<p align="center">
+<div align="center">
   <img width=250 src="0.doc/artwork/uberClock.sticker.png">
-</p>
+</div>
 
 They differ in Absolute Accuracy, Long-term Frequency Stability (e.g. due to aging), Short-term Frequency Stability (due to temperature changes), Phase Noise (aka Jitter), physical size, complexity, immunity to external interference (due to physical vibrations, humidity, EMP, EW), power consumption, cost, etc. These differences are categorized as “Clock Strata”, whereby a clock source must meet a standardized set of requirements for each Stratum level.
 
@@ -37,25 +37,25 @@ This is a Proof-of-Concept (PoC) and stepping stone for future applied research 
 ## Hardware platform
 - **Physics Package** -- Full-custom [Analog Board](https://github.com/jdbrinton/uberclock) with multi-mode Quartz Crystal
 
-<p align="center">
+<div align="center">
   <img width=250 src="0.doc/Quartz/Analog-Card.1.jpg">
   <img width=200 src="0.doc/Quartz/Analog-Card.2.png">
-</p>
+</div>
   
 - [AX7203 Artix7-200 FPGA Board](https://www.en.alinx.com/Product/FPGA-Development-Boards/Artix-7/AX7203.html)
-<p align="center">
+<div align="center">
   <img width=600 src="0.doc/Alinx/FPGA-Board--Artix7-200--AX7203.jpg">
-</p>
+</div>
   
 - [AN9238 2xADC,  65MSPS, 12bit](https://www.en.alinx.com/Product/Add-on-Modules/AN9238.html)
-<p align="center">
+<div align="center">
     <img width=300 src="0.doc/Alinx/2xADC--65MSPS-12bit--AN9238.jpg">
-</p>
+</div>
     
 - [AN9767 2xDAC, 125MSPS, 14bit](https://www.en.alinx.com/Product/Add-on-Modules/AN9767.html)
-<p align="center">
+<div align="center">
   <img width=300 src="0.doc/Alinx/2xDAC--125MSPS-14bit--AN9767.jpg">
-</p>
+</div>
 
 
 --------------------
@@ -189,9 +189,9 @@ for any future peripheral-free RTL work where a fully open flow matters.
 # HW Architecture
 - WIP
   
-<p align="center">
+<div align="center">
   <img width=800 src="0.doc/HW_architecture.png">
-</p>
+</div>
 
 
 --------------------
@@ -212,10 +212,10 @@ This repository uses multiple licenses. Text and documentation are licensed unde
 ## Acknowledgements
 We are grateful to **NLnet Foundation** for their sponsorship of this development activity.
 
-<p align="center">
+<div align="center">
    <img width="25%" src="https://nlnet.nl/logo/banner.svg">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
    <img width="25%" src="https://nlnet.nl/image/logos/NGI0Core_tag.svg">
-</p>
+</div>
 
 This project was funded through the NGI0 Commons Fund, a fund established by NLnet with financial support from the European Commission's Next Generation Internet programme, under the aegis of DG Communications Networks, Content and Technology under grant agreement N<sup>o</sup> 101135429. Additional funding is made available by the Swiss State Secretariat for Education, Research and Innovation (SERI).
 

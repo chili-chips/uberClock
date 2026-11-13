@@ -20,9 +20,9 @@ Our goal here was to:
 
 We utilize the **Butterworth-Van Dyke (BVD) Equivalent Circuit** to model the crystal. The basic theoretical model for a single resonance frequency looks like this:
 
-<p align="center">
+<div align="center">
   <img src="bvd_single_mode.png" alt="Basic Single-Mode BVD Schematic" width="400">
-</p>
+</div>
 
 However, a real physical quartz crystal has multiple vibration modes (overtones and spurious modes). To accurately simulate our crystal across a wide frequency range (3 MHz to 11 MHz), we expanded this into a **Multi-Mode BVD Model**. 
 
@@ -91,6 +91,6 @@ This script reads the newly generated `bvd_parameters.txt` file and creates an i
 
 The generated Python model beautifully mimics the physical reality of the crystal. By plotting the impedance magnitude (in dBΩ) versus frequency, we can clearly see the sharp impedance drops (resonance points) exactly at the measured frequencies for all modes.
 
-<p align="center">
+<div align="center">
   <img src="crystal_model.png" alt="Impedance Plot" width="700">
-</p>
+</div>

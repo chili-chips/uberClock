@@ -109,9 +109,9 @@ To analyze the effects of gravity and physical stress, measurements were taken i
 
 The image below clarifies the naming convention for each side.
 
-<p align="center">
+<div align="center">
   <img width=400 src="0.doc/OrientationDiagram.png">
-</p>
+</div>
 
 
 | Orientation Name  | Description                             |
@@ -127,11 +127,11 @@ The image below clarifies the naming convention for each side.
 
 To provide a visual reference for our orientation setup, here are three pictures of the measurement box in different positions. From left to right, the images show the box in the Top, Front, and Back orientations.
 
-<p align="center">
+<div align="center">
   <img width=200 src="0.doc/top.jpg">
   <img width=240 src="0.doc/front.jpg">
   <img width=205 src="0.doc/back.jpg">
-</p>
+</div>
 
 
 ## Analysis and Goals
@@ -143,9 +143,9 @@ The workflow involves:
 2.  **Identifying the peak resonant frequency** from the data.
 3.  **Calculating the frequency deviation in parts-per-million (ppm)** to normalize the results for comparison. The deviation is calculated relative to a reference frequency ($f_{\text{ref}}$)
 
-<p align="center">
+<div align="center">
     $\text{ppm} = \frac{f(T) - f_{\text{ref}}}{f_{\text{ref}}} \times 10^6$
-</p>
+</div>
 
 **Example Result:**
 
@@ -155,7 +155,7 @@ The analysis folder contains visualizations generated from this process. For exa
 
 ## Test Equipment
 
-<p align="center">
+<div align="center">
   <img width=400 src="0.doc/BB3--1.jpg">
   <img width=200 src="0.doc/BB3--2.jpg">
   </br>
@@ -170,7 +170,7 @@ The analysis folder contains visualizations generated from this process. For exa
   <img width=400 src="0.doc/XTAL-Enclosure-2.jpg">
   <img width=400 src="0.doc/XTAL-Enclosure-3.jpg">
   </br>
-</p>
+</div>
 
 - [OctoClock-G CDA-2990](https://www.ettus.com/all-products/octoclock-g/)
   

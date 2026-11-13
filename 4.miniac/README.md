@@ -7,32 +7,32 @@ The Miniac presents a comprehensive study and implementation of high-speed Analo
 We explore two distinct methodologies: a Direct Method that involves real-time, sample-by-sample data transfer, and an Indirect (Batch Processing) Method designed to overcome the inherent limitations of the direct approach. This project demonstrates how FPGA-side buffering and intelligent data transfer strategies can dramatically improve effective sampling rates, making the acquisition of higher-frequency signals feasible for various applications. This README details the hardware and software architecture, the implementation of both methods, their comparative performance, and provides instructions for replication.
 
 - Overview of the hardware setup
-<p align="center">
+<div align="center">
     <img width=600 src="0.doc/setUp.jpg">
-</p>
+</div>
 
 ## Project overview
 
 ### Hardware components
 
 - [AX7203 Artix7-200 FPGA Board](https://www.en.alinx.com/Product/FPGA-Development-Boards/Artix-7/AX7203.html)
-<p align="center">
+<div align="center">
   <img width=600 src="0.doc/FPGA-Board--Artix7-200--AX7203.jpg">
-</p>
+</div>
   
 - [AN9238 2xADC,  65MSPS, 12bit](https://www.en.alinx.com/Product/Add-on-Modules/AN9238.html)
-<p align="center">
+<div align="center">
     <img width=300 src="0.doc/2xADC--65MSPS-12bit--AN9238.jpg">
-</p>
+</div>
 
 
 ## Methodology
 
 The Miniac is a tool for data acquisition and visualizationation. As can be seen on teh diagram below, first we use our ADC to sample sine signals from a signal generator, after which we send our data to the Control and Status Registers (CSR). From here we have two options, one is to take the data directly from the CSR and send it via UART to our PC, where we will then run our Python code for visualization and dsp, or we can collect the data from CSR with our RISC-V processor and store the data in DMEM. Once we store this data we can then send all of it (once again via UART) to our PC. There we will have another Python code ready to read the data and do visualization and FFT. The two options we described are our Direct and Indirect snooping methods, respectfully.
 
-<p align="center">
+<div align="center">
   <img width=900 src="0.doc/miniac.png">
-</p> 
+</div> 
 
 In this section we will present the two implemented methods: Direct and Indirect snooping methods.
 
@@ -42,19 +42,19 @@ This method uses the Python file "PlotDataADC.py" (https://github.com/chili-chip
 [Hz]. We demonstrate the functionality of our method on the pictures below.
 
 - Sampling a 50[Hz] sine with the direct method
-<p align="center">
+<div align="center">
     <img width=600 src="0.doc/PlotDataADC_50Hz.png">
-</p>
+</div>
 
 - Sampling a 100[Hz] sine with the direct method
-<p align="center">
+<div align="center">
     <img width=600 src="0.doc/PlotDataADC_100Hz.png">
-</p>
+</div>
 
 - Sampling a 120[Hz] sine with the direct method
-<p align="center">
+<div align="center">
     <img width=600 src="0.doc/PlotDataADC_120Hz.png">
-</p>
+</div>
 
 
 ### Indirect snooping method
@@ -64,19 +64,19 @@ For this method we run "CPUSnooping.py" (https://github.com/chili-chips/uberCloc
 The fundamental difference between this script and the direct method lies in their data transfer strategy and overall efficiency. The first script continuously polls the FPGA for individual ADC samples, leading to significant UART overhead and limiting the achievable sampling frequency to approximately 100 Hz due to the overhead of numerous small transactions and PC-side latencies. In contrast, this indirect method batches data transfer by reading large blocks (1024 samples) at once, and crucially, allows the FPGA to sample and buffer data autonomously without constant PC intervention. This approach drastically reduces the number of UART transactions and minimizes PC-side communication overhead, enabling the system to achieve a much higher effective sampling frequency of up to 250 [kHz], making it far more suitable for acquiring higher-frequency signals. We demonstrate the functionality of our method on the pictures below.
 
 - Sampling a 50[Hz] sine with the direct method
-<p align="center">
+<div align="center">
     <img width=600 src="0.doc/CPUSnooping_100kHz.png">
-</p>
+</div>
 
 - Sampling a 200[kHz] sine with the direct method
-<p align="center">
+<div align="center">
     <img width=600 src="0.doc/CPUSnooping_200kHz.png">
-</p>
+</div>
 
 - Sampling a 250[kHz] sine with the direct method
-<p align="center">
+<div align="center">
     <img width=600 src="0.doc/CPUSnooping_250kHz.png">
-</p>
+</div>
 
 
 
