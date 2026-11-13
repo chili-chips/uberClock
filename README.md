@@ -2,7 +2,7 @@
 
 
 [![NLnet Foundation](https://img.shields.io/badge/funded%20by-NLnet%20Foundation-74AA00)](https://nlnet.nl/)
-[![Docs](https://img.shields.io/badge/docs-GitLab%20Pages-blue)](https://chili-chips.gitlab.io/uberclock/)
+[![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://chili-chips.github.io/uberClock/)
 [![GitHub stars](https://img.shields.io/github/stars/chili-chips/uberClock?style=social)](https://github.com/chili-chips/uberClock/stargazers)
 [![GitLab mirror](https://img.shields.io/badge/GitLab-mirror-FC6D26)](https://gitlab.com/chili-chips/uberclock)
 

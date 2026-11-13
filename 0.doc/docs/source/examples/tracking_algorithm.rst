@@ -400,7 +400,7 @@ Example:
    trackq hf vertex: ch1=10003949.685Hz ch2=6270945.502Hz ch3=3388436.792Hz
    trackq hf vertex: ch1=10003949.685Hz ch2=6270868.985Hz ch3=3388412.578Hz
 
-Using the `low-speed debug signal capture <https://chili-chips.gitlab.io/uberclock/examples/capture_low_speed.html>`__,
+Using the `low-speed debug signal capture <https://chili-chips.github.io/uberClock/examples/capture_low_speed.html>`__,
 the three tracking tones can be observed directly in the FPGA debug channels.
 
 The tracker attempts to keep the central 1 kHz tone aligned with the
@@ -420,7 +420,7 @@ interpolated resonance peak.
 
 All three resonant modes, corresponding to 9 tones in total, can also be
 observed with the
-`high-speed DDR3 debug capture <https://chili-chips.gitlab.io/uberclock/examples/capture_high_speed_ddr3.html>`__.
+`high-speed DDR3 debug capture <https://chili-chips.github.io/uberClock/examples/capture_high_speed_ddr3.html>`__.
 
 .. image:: https://github.com/user-attachments/assets/3cdd1d4f-3b93-4424-8c77-231ab8801f41
    :width: 100%
