@@ -81,3 +81,6 @@ __pycache__/
 # CSR files
 !3.build/build/alinx_ax7203/csr.json
 !3.build/build/alinx_ax7203/csr.csv
+
+# REUSE license texts
+!LICENSES/*.txt
